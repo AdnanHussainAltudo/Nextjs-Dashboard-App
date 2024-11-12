@@ -1,4 +1,3 @@
-// Loading animation
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
 
@@ -105,30 +104,29 @@ export default function DashboardSkeleton() {
 export function TableRowSkeleton() {
   return (
     <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
-      {/* Customer Name and Image */}
       <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-gray-100"></div>
           <div className="h-6 w-24 rounded bg-gray-100"></div>
         </div>
       </td>
-      {/* Email */}
+
       <td className="whitespace-nowrap px-3 py-3">
         <div className="h-6 w-32 rounded bg-gray-100"></div>
       </td>
-      {/* Amount */}
+
       <td className="whitespace-nowrap px-3 py-3">
         <div className="h-6 w-16 rounded bg-gray-100"></div>
       </td>
-      {/* Date */}
+
       <td className="whitespace-nowrap px-3 py-3">
         <div className="h-6 w-16 rounded bg-gray-100"></div>
       </td>
-      {/* Status */}
+
       <td className="whitespace-nowrap px-3 py-3">
         <div className="h-6 w-16 rounded bg-gray-100"></div>
       </td>
-      {/* Actions */}
+
       <td className="whitespace-nowrap py-3 pl-6 pr-3">
         <div className="flex justify-end gap-3">
           <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
@@ -217,105 +215,95 @@ export function InvoicesTableSkeleton() {
   );
 }
 
-export function CustomerTableRowSkeleton() {
-  return (
-    <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
-      {/* Customer Name and Image */}
-      <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-gray-100 animate-pulse"></div>
-          <div className="h-6 w-24 rounded bg-gray-100 animate-pulse"></div>
-        </div>
-      </td>
-      {/* Email */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-32 rounded bg-gray-100 animate-pulse"></div>
-      </td>
-      {/* Total Invoices */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-gray-100 animate-pulse"></div>
-      </td>
-      {/* Total Pending */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-gray-100 animate-pulse"></div>
-      </td>
-      {/* Total Paid */}
-      <td className="whitespace-nowrap px-3 py-3">
-        <div className="h-6 w-16 rounded bg-gray-100 animate-pulse"></div>
-      </td>
-    </tr>
-  );
-}
-
-export function CustomersMobileSkeleton() {
-  return (
-    <div className="mb-2 w-full rounded-md bg-white p-4 animate-pulse">
-      <div className="flex items-center justify-between border-b border-gray-100 pb-8">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-gray-100"></div>
-          <div className="h-6 w-24 rounded bg-gray-100"></div>
-        </div>
-        <div className="h-6 w-16 rounded bg-gray-100"></div>
-      </div>
-      <div className="flex w-full items-center justify-between pt-4">
-        <div>
-          <div className="h-6 w-16 rounded bg-gray-100"></div>
-          <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
-        </div>
-        <div className="flex flex-col items-end">
-          <div className="h-6 w-16 rounded bg-gray-100"></div>
-          <div className="mt-2 h-6 w-16 rounded bg-gray-100"></div>
-        </div>
-      </div>
-      <div className="pt-4 text-sm">
-        <div className="h-6 w-24 rounded bg-gray-100"></div>
-      </div>
-    </div>
-  );
-}
-
 export function CustomersTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-md bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
-            <CustomersMobileSkeleton />
-            <CustomersMobileSkeleton />
-            <CustomersMobileSkeleton />
-            <CustomersMobileSkeleton />
-            <CustomersMobileSkeleton />
-            <CustomersMobileSkeleton />
+      <div className="overflow-x-auto">
+        <div className="inline-block min-w-full align-middle">
+          <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
+            <div className="md:hidden">
+              {Array(6)
+                .fill(null)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className="mb-2 w-full rounded-md bg-white p-4"
+                  >
+                    <div className="flex items-center justify-between border-b pb-4">
+                      <div>
+                        <div className="mb-2 flex items-center">
+                          <div className="h-8 w-8 rounded-full bg-gray-100"></div>
+                          <div className="h-6 w-24 rounded bg-gray-100"></div>
+                        </div>
+                        <div className="h-6 w-32 rounded bg-gray-100"></div>
+                      </div>
+                    </div>
+                    <div className="flex w-full items-center justify-between border-b py-5">
+                      <div className="flex w-1/2 flex-col">
+                        <div className="h-6 w-16 rounded bg-gray-100"></div>
+                        <div className="mt-2 h-6 w-20 rounded bg-gray-100"></div>
+                      </div>
+                      <div className="flex w-1/2 flex-col">
+                        <div className="h-6 w-16 rounded bg-gray-100"></div>
+                        <div className="mt-2 h-6 w-20 rounded bg-gray-100"></div>
+                      </div>
+                    </div>
+                    <div className="pt-4 text-sm">
+                      <div className="h-6 w-32 rounded bg-gray-100"></div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            <table className="hidden min-w-full rounded-md text-gray-900 md:table">
+              <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
+                <tr>
+                  <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                    Name
+                  </th>
+                  <th scope="col" className="px-3 py-5 font-medium">
+                    Email
+                  </th>
+                  <th scope="col" className="px-3 py-5 font-medium">
+                    Total Invoices
+                  </th>
+                  <th scope="col" className="px-3 py-5 font-medium">
+                    Total Pending
+                  </th>
+                  <th scope="col" className="px-4 py-5 font-medium">
+                    Total Paid
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y divide-gray-200 text-gray-900">
+                {Array(6)
+                  .fill(null)
+                  .map((_, index) => (
+                    <tr key={index} className="group">
+                      <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+                        <div className="flex items-center gap-3">
+                          <div className="h-8 w-8 rounded-full bg-gray-100"></div>
+                          <div className="h-6 w-24 rounded bg-gray-100"></div>
+                        </div>
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        <div className="h-6 w-32 rounded bg-gray-100"></div>
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        <div className="h-6 w-16 rounded bg-gray-100"></div>
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        <div className="h-6 w-16 rounded bg-gray-100"></div>
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
+                        <div className="h-6 w-16 rounded bg-gray-100"></div>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-left text-sm font-normal">
-              <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Name
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Email
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Total Invoices
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Total Pending
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Total Paid
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              <CustomerTableRowSkeleton />
-              <CustomerTableRowSkeleton />
-              <CustomerTableRowSkeleton />
-              <CustomerTableRowSkeleton />
-              <CustomerTableRowSkeleton />
-              <CustomerTableRowSkeleton />
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
