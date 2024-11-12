@@ -1,12 +1,13 @@
 import Image from "next/image";
 
 import { FormattedCustomersTable } from "@/app/lib/definitions";
+import { fetchFilteredCustomers } from "@/app/lib/data";
 
-export default async function CustomersTable({
-  customers,
-}: {
-  customers: FormattedCustomersTable[];
-}) {
+export default async function CustomersTable({ query }: { query: string }) {
+  const customers: FormattedCustomersTable[] = await fetchFilteredCustomers(
+    query
+  );
+
   return (
     <div className="mt-6 flow-root">
       <div className="overflow-x-auto">

@@ -1,8 +1,7 @@
-import CustomersTable from "@/app/ui/customers/table";
 import Search from "@/app/ui/search";
+import CustomersTable from "@/app/ui/customers/table";
 import { lusitana } from "@/app/ui/fonts";
 import { CustomersTableSkeleton } from "@/app/ui/skeletons";
-import { fetchFilteredCustomers } from "@/app/lib/data";
 import { Suspense } from "react";
 import { Metadata } from "next";
 
@@ -17,8 +16,6 @@ export default async function Page(props: {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
-  const customers = await fetchFilteredCustomers(query);
-
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -28,7 +25,7 @@ export default async function Page(props: {
         <Search placeholder="Search customers..." />
       </div>
       <Suspense key={query + currentPage} fallback={<CustomersTableSkeleton />}>
-        <CustomersTable customers={customers} />
+        <CustomersTable query={query} />
       </Suspense>
     </div>
   );

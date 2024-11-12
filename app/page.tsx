@@ -17,11 +17,18 @@ export default function Page() {
           <p
             className={`text-xl text-gray-800 md:text-3xl md:leading-normal ${lusitana.className} antialiased`}
           >
-            <strong>Welcome to Acme.</strong> This is the example for the{" "}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
+            <strong>Welcome to Acme.</strong>
+            <br />
+            A Dashboard Application by
+            <br />{" "}
+            <a
+              href="https://linkedin.com/in/mdadnanhusaain"
+              className="text-blue-700"
+              target="_blank"
+            >
+              Md Adnan Hussain
             </a>
-            , brought to you by Vercel.
+            , hosted on Vercel.
           </p>
           <Link
             href="/login"
@@ -31,7 +38,6 @@ export default function Page() {
           </Link>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          
           <Image
             src="/hero-desktop.png"
             width={1000}
