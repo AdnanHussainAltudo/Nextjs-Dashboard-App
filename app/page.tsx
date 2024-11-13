@@ -21,13 +21,13 @@ export default function Page() {
             <br />
             A Dashboard Application by
             <br />{" "}
-            <a
+            <Link
               href="https://linkedin.com/in/mdadnanhusaain"
               className="text-blue-700"
               target="_blank"
             >
               Md Adnan Hussain
-            </a>
+            </Link>
             , hosted on Vercel.
           </p>
           <Link
