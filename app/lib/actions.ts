@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import bcrypt from "bcrypt";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -136,5 +137,75 @@ export async function authenticate(
       }
     }
     throw error;
+  }
+}
+
+const UserSchema = z.object({
+  id: z.string(),
+  name: z.string({
+    required_error: "Please enter your name.",
+    invalid_type_error: "Name must be a string.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email.",
+  }),
+  password: z.string().min(6, {
+    message: "Password length must be greater than 6.",
+  }),
+});
+
+const CreateUser = UserSchema.omit({ id: true });
+
+export type signupState = {
+  errors?: {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+    authentication?: string[];
+    database?: string[];
+  };
+  message?: string | null;
+  success?: boolean | null;
+};
+
+export async function createUser(
+  prevState: signupState | undefined,
+  formData: FormData
+): Promise<signupState> {
+  const validatedFields = CreateUser.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Create Account",
+    };
+  }
+
+  const { name, email, password } = validatedFields.data;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  console.log(name, email, hashedPassword);
+
+  try {
+    await sql`
+    INSERT INTO users (name, email, password)
+    VALUES (${name}, ${email}, ${hashedPassword})
+    `;
+
+    return {
+      success: true,
+      message: "User created successfully! You can now log in.",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Database Error: Failed to Create User",
+    };
   }
 }

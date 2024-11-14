@@ -10,6 +10,7 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "./button";
 import { useActionState } from "react";
 import { authenticate } from "@/app/lib/actions";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(
@@ -79,6 +80,12 @@ export default function LoginForm() {
             </>
           )}
         </div>
+        <p>
+          Don&apos;t have an Account?{" "}
+          <Link href={"/signup"} className="text-blue-500">
+            Create Now
+          </Link>
+        </p>
       </div>
     </form>
   );
