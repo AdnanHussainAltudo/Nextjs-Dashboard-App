@@ -209,3 +209,83 @@ export async function createUser(
     };
   }
 }
+
+const ContactSchema = z.object({
+  id: z.string(),
+  firstName: z.string({
+    invalid_type_error: "Please enter a valid name.",
+  }),
+  lastName: z.string({
+    invalid_type_error: "Please enter a valid name.",
+  }),
+  email: z.string({
+    invalid_type_error: "Please select a customer.",
+  }),
+  phone: z.coerce
+    .number()
+    .gt(0, { message: "Please enter an amount greater than $0." }),
+  address: z.string({
+    invalid_type_error: "Please select a customer.",
+  }),
+  message: z.string({
+    invalid_type_error: "Please select a customer.",
+  }),
+  date: z.string(),
+});
+
+const CreateMesssage = ContactSchema.omit({ id: true, date: true });
+
+export type contactState = {
+  errors?: {
+    firstName?: string[];
+    lastName?: string[];
+    address?: string[];
+    email?: string[];
+    phone?: string[];
+    message?: string[];
+  };
+  success?: boolean | null;
+  message?: string | null;
+};
+
+export async function sendMessage(prevState: contactState, formData: FormData) {
+  const validatedFields = CreateMesssage.safeParse({
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
+    address: formData.get("address"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    message: formData.get("message"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Create Invoice",
+    };
+  }
+
+  let { firstName, lastName, email, phone, address, message } =
+    validatedFields.data;
+
+  phone = phone * 1;
+  const date = new Date().toISOString().split("T")[0];
+
+  console.log(validatedFields.data);
+
+  try {
+    await sql`
+    INSERT INTO messages (first_name, last_name, email, phone, address, message, date)
+    VALUES (${firstName},${lastName},${email}, ${phone}, ${address}, ${message}, ${date})
+    `;
+  } catch (error) {
+    return {
+      success: false,
+      error,
+      message: "Server Error: Failed to Send Message",
+    };
+  }
+  return {
+    success: true,
+  };
+}
