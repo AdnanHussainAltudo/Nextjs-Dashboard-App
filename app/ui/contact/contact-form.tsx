@@ -9,14 +9,15 @@ import {
   UserCircleIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { useActionState, useEffect, useTransition } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import { Button } from "../button";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { contactFormData } from "@/app/lib/definitions";
+import clsx from "clsx";
 
-// Define validation schema
 const schema = yup.object({
   firstName: yup
     .string()
@@ -52,6 +53,11 @@ const schema = yup.object({
       "is-exact-length",
       "Phone number must be exactly 10 digits in length",
       (value) => value?.length === 10 || !value
+    )
+    .test(
+      "does-not-start-with-zero",
+      "Phone number cannot start with 0",
+      (value) => !value?.startsWith("0")
     ),
   message: yup.string().required("Message is required"),
 });
@@ -65,6 +71,7 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors: clientErrors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -73,17 +80,25 @@ export default function ContactForm() {
   const router = useRouter();
 
   useEffect(() => {
-    if (state.success) {
-      alert("Message sent!");
-      router.push("/dashboard");
-    }
-  }, [state, router]);
+    async function checkSubmit() {
+      if (state.success) {
+        reset();
 
-  const onSubmit = (data: any) => {
+        setTimeout(() => {
+          alert("Message sent!");
+          router.push("/dashboard");
+        }, 100);
+      }
+    }
+    checkSubmit();
+  }, [state, router, reset]);
+
+  const onSubmit = (data: contactFormData) => {
     startTransition(() => {
       formAction(data);
     });
   };
+
   const renderErrors = (clientError?: string, serverErrors?: string[]) => {
     const allErrors = [];
     if (clientError) allErrors.push(clientError);
@@ -241,7 +256,19 @@ export default function ContactForm() {
           </div>
         </div>
         <div className="mt-6 flex justify-end gap-4">
-          <Button type="submit">Send Message</Button>
+          <Button
+            type="submit"
+            disabled={isPending}
+            className={clsx(
+              "px-4 py-2 rounded-md text-white transition-all duration-200",
+              {
+                "bg-blue-500": !isPending,
+                "bg-blue-200 cursor-not-allowed": isPending,
+              }
+            )}
+          >
+            {isPending ? "Submitting..." : "Send Message"}
+          </Button>
         </div>
       </form>
     </>

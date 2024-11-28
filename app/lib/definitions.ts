@@ -80,3 +80,12 @@ export type InvoiceForm = {
   amount: number;
   status: "pending" | "paid";
 };
+
+export type contactFormData = {
+  firstName: string | null;
+  lastName: string | null;
+  address: string | null;
+  email: string | null;
+  phone: string | null;
+  message: string | null;
+};

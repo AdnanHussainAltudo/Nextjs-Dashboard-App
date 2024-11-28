@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import bcrypt from "bcrypt";
+import { contactFormData } from "./definitions";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -261,15 +262,6 @@ export type contactState = {
   };
   success?: boolean | null;
   message?: string | null;
-};
-
-export type contactFormData = {
-  firstName: string | null;
-  lastName: string | null;
-  address: string | null;
-  email: string | null;
-  phone: string | null;
-  message: string | null;
 };
 
 export async function sendMessage(
