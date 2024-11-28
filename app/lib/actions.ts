@@ -265,10 +265,10 @@ export async function sendMessage(prevState: contactState, formData: FormData) {
     };
   }
 
-  let { firstName, lastName, email, phone, address, message } =
+  const { firstName, lastName, email, phone, address, message } =
     validatedFields.data;
 
-  phone = phone * 1;
+  const phoneNumber: number = phone * 1;
   const date = new Date().toISOString().split("T")[0];
 
   console.log(validatedFields.data);
@@ -276,7 +276,7 @@ export async function sendMessage(prevState: contactState, formData: FormData) {
   try {
     await sql`
     INSERT INTO messages (first_name, last_name, email, phone, address, message, date)
-    VALUES (${firstName},${lastName},${email}, ${phone}, ${address}, ${message}, ${date})
+    VALUES (${firstName},${lastName},${email}, ${phoneNumber}, ${address}, ${message}, ${date})
     `;
   } catch (error) {
     return {

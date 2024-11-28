@@ -1,12 +1,9 @@
 "use client";
 
-import { contactState, sendMessage, State } from "@/app/lib/actions";
+import { contactState, sendMessage } from "@/app/lib/actions";
 import {
   AtSymbolIcon,
   ChatBubbleLeftIcon,
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
   MapPinIcon,
   PhoneIcon,
   UserCircleIcon,
@@ -28,7 +25,7 @@ export default function ContactForm() {
       alert("Message sent!");
       router.push("/dashboard");
     }
-  }, [state.success, router]);
+  }, [state, router]);
 
   return (
     <>
