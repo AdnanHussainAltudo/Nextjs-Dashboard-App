@@ -14,7 +14,10 @@ importers:
     dependencies:
       '@heroicons/react':
         specifier: ^2.1.4
-        version: 2.1.4(react@19.0.0-rc-cd22717c-20241013)
+        version: 2.1.4(react@18.2.0)
+      '@hookform/resolvers':
+        specifier: ^3.9.1
+        version: 3.9.1(react-hook-form@7.53.2(react@18.2.0))
       '@next/bundle-analyzer':
         specifier: ^15.0.3
         version: 15.0.3(bufferutil@4.0.8)(utf-8-validate@6.0.3)
@@ -35,19 +38,22 @@ importers:
         version: 2.1.1
       next:
         specifier: 15.0.3-canary.9
-        version: 15.0.3-canary.9(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)
+        version: 15.0.3-canary.9(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-auth:
         specifier: 5.0.0-beta.25
-        version: 5.0.0-beta.25(next@15.0.3-canary.9(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)
+        version: 5.0.0-beta.25(next@15.0.3-canary.9(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       postcss:
         specifier: 8.4.38
         version: 8.4.38
       react:
-        specifier: 19.0.0-rc-cd22717c-20241013
-        version: 19.0.0-rc-cd22717c-20241013
+        specifier: 18.2.0
+        version: 18.2.0
       react-dom:
-        specifier: 19.0.0-rc-cd22717c-20241013
-        version: 19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013)
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.53.2
+        version: 7.53.2(react@18.2.0)
       tailwindcss:
         specifier: 3.4.4
         version: 3.4.4
@@ -56,7 +62,10 @@ importers:
         version: 5.5.2
       use-debounce:
         specifier: ^10.0.1
-        version: 10.0.1(react@19.0.0-rc-cd22717c-20241013)
+        version: 10.0.1(react@18.2.0)
+      yup:
+        specifier: ^1.4.0
+        version: 1.4.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -145,6 +154,11 @@ packages:
     resolution: {integrity: sha512-ju0wj0wwrUTMQ2Yceyrma7TKuI3BpSjp+qKqV81K9KGcUHdvTMdiwfRc2cwXBp3uXtKuDZkh0v03nWOQnJFv2Q==}
     peerDependencies:
       react: '>= 16'
+
+  '@hookform/resolvers@3.9.1':
+    resolution: {integrity: sha512-ud2HqmGBM0P0IABqoskKWI6PEf6ZDDBZkFqe2Vnl+mTHCEHzr3ISjjZyCwTjC/qpL25JC9aIDkloQejvMeq0ug==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1669,6 +1683,9 @@ packages:
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
+  property-expr@2.0.6:
+    resolution: {integrity: sha512-SVtmxhRE/CGkn3eZY1T6pC8Nln6Fr/lu1mKSgRud0eC73whjGfoAogbn78LkD8aFL0zz3bAFerKSnOl7NlErBA==}
+
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
@@ -1676,16 +1693,22 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  react-dom@19.0.0-rc-cd22717c-20241013:
-    resolution: {integrity: sha512-NzjTBOXygonUxLRQuUUW5V2QLGkAcyUwJoS8+UWxs089paMvQQfoRD51w65Ovgd2OEQ8Rm3HWx+82fvXiT0czQ==}
+  react-dom@18.2.0:
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
-      react: 19.0.0-rc-cd22717c-20241013
+      react: ^18.2.0
+
+  react-hook-form@7.53.2:
+    resolution: {integrity: sha512-YVel6fW5sOeedd1524pltpHX+jgU2u3DSDtXEaBORNdqiNrsX/nUI/iGXONegttg0mJVnfrIkiV0cmTU6Oo2xw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react@19.0.0-rc-cd22717c-20241013:
-    resolution: {integrity: sha512-k28GszmyQ1tX/JmeLGZINq5KXiNy/MmN0fCAtcwF8a9INDyVYG0zATCRGJwaPB9WixmkuwPv1BfB1QBfJC7cNg==}
+  react@18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -1745,8 +1768,8 @@ packages:
     resolution: {integrity: sha512-CdASjNJPvRa7roO6Ra/gLYBTzYzzPyyBXxIMdGW3USQLyjWEls2RgW5UBTXaQVp+OrpeCK3bLem8smtmheoRuw==}
     engines: {node: '>= 0.4'}
 
-  scheduler@0.25.0-rc-cd22717c-20241013:
-    resolution: {integrity: sha512-MnsFR57bKcrYslnbCUsaUG0qBuAArk92VxE0zu6A2Usz38iIuL2uZLunqKlP1W47MF33GrRGDj1sXdPbFKIZfw==}
+  scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -1909,9 +1932,15 @@ packages:
   thenify@3.3.1:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
 
+  tiny-case@1.0.3:
+    resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
+
+  toposort@2.0.2:
+    resolution: {integrity: sha512-0a5EOkAUp8D4moMi2W8ZF8jcga7BgZd91O/yabJCFY8az+XSzeGyTKs0Aoo897iV1Nj6guFq8orWDS96z91oGg==}
 
   totalist@3.0.1:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
@@ -1938,6 +1967,10 @@ packages:
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
+
+  type-fest@2.19.0:
+    resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
+    engines: {node: '>=12.20'}
 
   typed-array-buffer@1.0.2:
     resolution: {integrity: sha512-gEymJYKZtKXzzBzM4jqa9w6Q1Jjm7x2d+sh19AdsD4wqnMPDYyvwpsIc2Q/835kHuo3BEQ7CjelGhfTsoBb2MQ==}
@@ -2083,6 +2116,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  yup@1.4.0:
+    resolution: {integrity: sha512-wPbgkJRCqIf+OHyiTBQoJiP5PFuAXaWiJK6AmYkzQAh5/c2K9hzSApBZG5wV9KoKSePF7sAxmNSvh/13YHkFDg==}
+
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
@@ -2146,9 +2182,13 @@ snapshots:
     dependencies:
       levn: 0.4.1
 
-  '@heroicons/react@2.1.4(react@19.0.0-rc-cd22717c-20241013)':
+  '@heroicons/react@2.1.4(react@18.2.0)':
     dependencies:
-      react: 19.0.0-rc-cd22717c-20241013
+      react: 18.2.0
+
+  '@hookform/resolvers@3.9.1(react-hook-form@7.53.2(react@18.2.0))':
+    dependencies:
+      react-hook-form: 7.53.2(react@18.2.0)
 
   '@humanfs/core@0.19.1': {}
 
@@ -3535,13 +3575,13 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-auth@5.0.0-beta.25(next@15.0.3-canary.9(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013):
+  next-auth@5.0.0-beta.25(next@15.0.3-canary.9(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0):
     dependencies:
       '@auth/core': 0.37.2
-      next: 15.0.3-canary.9(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013)
-      react: 19.0.0-rc-cd22717c-20241013
+      next: 15.0.3-canary.9(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
 
-  next@15.0.3-canary.9(react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013))(react@19.0.0-rc-cd22717c-20241013):
+  next@15.0.3-canary.9(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@next/env': 15.0.3-canary.9
       '@swc/counter': 0.1.3
@@ -3549,9 +3589,9 @@ snapshots:
       busboy: 1.6.0
       caniuse-lite: 1.0.30001683
       postcss: 8.4.31
-      react: 19.0.0-rc-cd22717c-20241013
-      react-dom: 19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013)
-      styled-jsx: 5.1.6(react@19.0.0-rc-cd22717c-20241013)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-jsx: 5.1.6(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.0.3-canary.9
       '@next/swc-darwin-x64': 15.0.3-canary.9
@@ -3765,18 +3805,27 @@ snapshots:
       object-assign: 4.1.1
       react-is: 16.13.1
 
+  property-expr@2.0.6: {}
+
   punycode@2.3.1: {}
 
   queue-microtask@1.2.3: {}
 
-  react-dom@19.0.0-rc-cd22717c-20241013(react@19.0.0-rc-cd22717c-20241013):
+  react-dom@18.2.0(react@18.2.0):
     dependencies:
-      react: 19.0.0-rc-cd22717c-20241013
-      scheduler: 0.25.0-rc-cd22717c-20241013
+      loose-envify: 1.4.0
+      react: 18.2.0
+      scheduler: 0.23.2
+
+  react-hook-form@7.53.2(react@18.2.0):
+    dependencies:
+      react: 18.2.0
 
   react-is@16.13.1: {}
 
-  react@19.0.0-rc-cd22717c-20241013: {}
+  react@18.2.0:
+    dependencies:
+      loose-envify: 1.4.0
 
   read-cache@1.0.0:
     dependencies:
@@ -3850,7 +3899,9 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
-  scheduler@0.25.0-rc-cd22717c-20241013: {}
+  scheduler@0.23.2:
+    dependencies:
+      loose-envify: 1.4.0
 
   semver@6.3.1: {}
 
@@ -4008,10 +4059,10 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-jsx@5.1.6(react@19.0.0-rc-cd22717c-20241013):
+  styled-jsx@5.1.6(react@18.2.0):
     dependencies:
       client-only: 0.0.1
-      react: 19.0.0-rc-cd22717c-20241013
+      react: 18.2.0
 
   sucrase@3.35.0:
     dependencies:
@@ -4077,9 +4128,13 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
+  tiny-case@1.0.3: {}
+
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
+
+  toposort@2.0.2: {}
 
   totalist@3.0.1: {}
 
@@ -4103,6 +4158,8 @@ snapshots:
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
+
+  type-fest@2.19.0: {}
 
   typed-array-buffer@1.0.2:
     dependencies:
@@ -4165,9 +4222,9 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  use-debounce@10.0.1(react@19.0.0-rc-cd22717c-20241013):
+  use-debounce@10.0.1(react@18.2.0):
     dependencies:
-      react: 19.0.0-rc-cd22717c-20241013
+      react: 18.2.0
 
   utf-8-validate@6.0.3:
     dependencies:
@@ -4280,5 +4337,12 @@ snapshots:
   yaml@2.4.3: {}
 
   yocto-queue@0.1.0: {}
+
+  yup@1.4.0:
+    dependencies:
+      property-expr: 2.0.6
+      tiny-case: 1.0.3
+      toposort: 2.0.2
+      type-fest: 2.19.0
 
   zod@3.23.8: {}

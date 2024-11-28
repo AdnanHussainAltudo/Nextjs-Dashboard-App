@@ -212,24 +212,39 @@ export async function createUser(
 
 const ContactSchema = z.object({
   id: z.string(),
-  firstName: z.string({
-    invalid_type_error: "Please enter a valid name.",
-  }),
-  lastName: z.string({
-    invalid_type_error: "Please enter a valid name.",
-  }),
-  email: z.string({
-    invalid_type_error: "Please select a customer.",
-  }),
-  phone: z.coerce
-    .number()
-    .gt(0, { message: "Please enter an amount greater than $0." }),
-  address: z.string({
-    invalid_type_error: "Please select a customer.",
-  }),
-  message: z.string({
-    invalid_type_error: "Please select a customer.",
-  }),
+  firstName: z
+    .string({
+      invalid_type_error: "Please enter a valid name.",
+    })
+    .nonempty("First name is required."),
+  lastName: z
+    .string({
+      invalid_type_error: "Please enter a valid name.",
+    })
+    .nonempty("Last name is required."),
+  email: z
+    .string({
+      invalid_type_error: "Please enter a valid email.",
+    })
+    .email("Invalid email format."),
+  phone: z
+    .string({ invalid_type_error: "Phone number must be a string." })
+    .refine((value) => /^\d+$/.test(value), {
+      message: "Phone number should contain only numeric digits.",
+    })
+    .refine((value) => value.length === 10, {
+      message: "Phone number must be exactly 10 digits.",
+    }),
+  address: z
+    .string({
+      invalid_type_error: "Please enter a valid address.",
+    })
+    .nonempty("Address is required."),
+  message: z
+    .string({
+      invalid_type_error: "Please enter a valid message.",
+    })
+    .nonempty("Message is required."),
   date: z.string(),
 });
 
@@ -248,14 +263,26 @@ export type contactState = {
   message?: string | null;
 };
 
-export async function sendMessage(prevState: contactState, formData: FormData) {
+export type contactFormData = {
+  firstName: string | null;
+  lastName: string | null;
+  address: string | null;
+  email: string | null;
+  phone: string | null;
+  message: string | null;
+};
+
+export async function sendMessage(
+  prevState: contactState,
+  formData: contactFormData
+) {
   const validatedFields = CreateMesssage.safeParse({
-    firstName: formData.get("firstName"),
-    lastName: formData.get("lastName"),
-    address: formData.get("address"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    message: formData.get("message"),
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    address: formData.address,
+    email: formData.email,
+    phone: formData.phone,
+    message: formData.message,
   });
 
   if (!validatedFields.success) {
@@ -268,10 +295,8 @@ export async function sendMessage(prevState: contactState, formData: FormData) {
   const { firstName, lastName, email, phone, address, message } =
     validatedFields.data;
 
-  const phoneNumber: number = phone * 1;
+  const phoneNumber: number = Number(phone);
   const date = new Date().toISOString().split("T")[0];
-
-  console.log(validatedFields.data);
 
   try {
     await sql`
