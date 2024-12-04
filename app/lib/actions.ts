@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import bcrypt from "bcrypt";
-import { contactFormData } from "./definitions";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -209,100 +208,4 @@ export async function createUser(
       message: "Database Error: Failed to Create User",
     };
   }
-}
-
-const ContactSchema = z.object({
-  id: z.string(),
-  firstName: z
-    .string({
-      invalid_type_error: "Please enter a valid name.",
-    })
-    .nonempty("First name is required."),
-  lastName: z
-    .string({
-      invalid_type_error: "Please enter a valid name.",
-    })
-    .nonempty("Last name is required."),
-  email: z
-    .string({
-      invalid_type_error: "Please enter a valid email.",
-    })
-    .email("Invalid email format."),
-  phone: z
-    .string({ invalid_type_error: "Phone number must be a string." })
-    .refine((value) => /^\d+$/.test(value), {
-      message: "Phone number should contain only numeric digits.",
-    })
-    .refine((value) => value.length === 10, {
-      message: "Phone number must be exactly 10 digits.",
-    }),
-  address: z
-    .string({
-      invalid_type_error: "Please enter a valid address.",
-    })
-    .nonempty("Address is required."),
-  message: z
-    .string({
-      invalid_type_error: "Please enter a valid message.",
-    })
-    .nonempty("Message is required."),
-  date: z.string(),
-});
-
-const CreateMesssage = ContactSchema.omit({ id: true, date: true });
-
-export type contactState = {
-  errors?: {
-    firstName?: string[];
-    lastName?: string[];
-    address?: string[];
-    email?: string[];
-    phone?: string[];
-    message?: string[];
-  };
-  success?: boolean | null;
-  message?: string | null;
-};
-
-export async function sendMessage(
-  prevState: contactState,
-  formData: contactFormData
-) {
-  const validatedFields = CreateMesssage.safeParse({
-    firstName: formData.firstName,
-    lastName: formData.lastName,
-    address: formData.address,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Create Invoice",
-    };
-  }
-
-  const { firstName, lastName, email, phone, address, message } =
-    validatedFields.data;
-
-  const phoneNumber: number = Number(phone);
-  const date = new Date().toISOString().split("T")[0];
-
-  try {
-    await sql`
-    INSERT INTO messages (first_name, last_name, email, phone, address, message, date)
-    VALUES (${firstName},${lastName},${email}, ${phoneNumber}, ${address}, ${message}, ${date})
-    `;
-  } catch (error) {
-    return {
-      success: false,
-      error,
-      message: "Server Error: Failed to Send Message",
-    };
-  }
-  return {
-    success: true,
-  };
 }
